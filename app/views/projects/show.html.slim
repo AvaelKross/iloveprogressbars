@@ -1,0 +1,34 @@
+p#notice = notice
+
+p
+  strong User:
+  = @project.user_id
+p
+  strong Title:
+  = @project.title
+
+.meter[style="width: 300px;"]
+  span[style="width: #{@project.amount.to_f/@project.target_amount.to_f * 100}%"]
+
+p
+  strong Target amount:
+  = @project.target_amount
+p
+  strong Amount:
+  = @project.amount
+
+.meter[style="width: 300px;"]
+  span[style="width: #{100 - (@project.finish_date - DateTime.now)/(@project.finish_date - @project.start_date) * 100}%"]
+
+p
+  strong Finish date:
+  = @project.finish_date
+p
+  strong Start date:
+  = @project.start_date
+- if @project.user_id == current_user.id
+  = link_to 'Edit', edit_project_path(@project)
+  '|
+  = link_to 'Destroy', @project, data: {:confirm => 'Are you sure?'}, :method => :delete
+  '|
+= link_to 'Back', projects_path
