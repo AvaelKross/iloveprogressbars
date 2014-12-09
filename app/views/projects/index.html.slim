@@ -16,7 +16,7 @@ table
   tbody
     - @projects.each do |project|
       tr
-        td = project.user_id
+        td = project.user.email
         td = project.title
         td = project.target_amount
         td = project.amount
